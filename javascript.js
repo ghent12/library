@@ -42,8 +42,8 @@ const addBookInputRead = addBookLabelRead.appendChild(document.createElement('in
 const addBookButton = container.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
-      addBookButton.textContent = 'Add Book to Library';
-      addBookButton.addEventListener('click', () => clickHandler())
+      addBookButton.textContent = 'Add New Book to Library';
+      addBookButton.addEventListener('click', () => clickShowForm())
 
 let myLibrary = [
   {
@@ -103,6 +103,10 @@ function alreadyInLibrary() {
   return inLibrary;
 }
 
+function clickShowForm(e) {
+  showForm();
+}
+
 function clickHandler(e) {
   if (alreadyInLibrary()) {
     return null;
@@ -110,6 +114,10 @@ function clickHandler(e) {
     addBookToLibrary();
   };
   displayBooks();
+}
+
+function showForm() {
+
 }
 
 function displayBooks() {
@@ -139,7 +147,9 @@ function displayBooks() {
   }
 }
 
-let helloWorld = document.getElementById('hello-world')
+let helloWorld = document.getElementById('hello-world');
 helloWorld.removeChild(helloWorld.firstElementChild);
+//let hideForm = document.getElementById('add-book-form').children;
+//hideForm.style.display = 'hidden';
 
 displayBooks();
