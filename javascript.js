@@ -18,25 +18,25 @@ const addBookLabelTitle = addBookForm.appendChild(document.createElement('label'
       addBookLabelTitle.textContent = "Title: "
 const addBookInputTitle = addBookLabelTitle.appendChild(document.createElement('input'));
       addBookInputTitle.type = "text";
-      addBookInputTitle.name = "title";
+      addBookInputTitle.name = "form-title";
       addBookInputTitle.classList.add('input', 'input-title');
 const addBookLabelAuthor = addBookForm.appendChild(document.createElement('label'));
       addBookLabelAuthor.textContent = "Author: "
 const addBookInputAuthor = addBookLabelAuthor.appendChild(document.createElement('input'));
       addBookInputAuthor.type = "text";
-      addBookInputAuthor.name = "author";
+      addBookInputAuthor.name = "form-author";
       addBookInputAuthor.classList.add('input', 'input-author');
 const addBookLabelPages = addBookForm.appendChild(document.createElement('label'));
       addBookLabelPages.textContent = "Pages: "
 const addBookInputPages = addBookLabelPages.appendChild(document.createElement('input'));
       addBookInputPages.type = "number";
-      addBookInputPages.name = "pages";
+      addBookInputPages.name = "form-pages";
       addBookInputPages.classList.add('input', 'input-pages');
 const addBookLabelRead = addBookForm.appendChild(document.createElement('label'));
       addBookLabelRead.textContent = "Read? "
 const addBookInputRead = addBookLabelRead.appendChild(document.createElement('input'));
       addBookInputRead.type = "checkbox";
-      addBookInputRead.name = "read";
+      addBookInputRead.name = "form-read";
       addBookInputRead.classList.add('input', 'input-read');
       addBookInputRead.checked = false;
 const addBookButton = container.appendChild(document.createElement('button'));
@@ -50,19 +50,19 @@ let myLibrary = [
     author: "J.R.R. Tolkien",
     title: "The Hobbit",
     pages: 304,
-    read: true
+    read: false
   },
   {
     author: "Tom Clancy",
     title: "The Hunt for Red October",
     pages: 387,
-    read: true
+    read: false
   },
   {
     author: "John Stuart Mill",
     title: "On Liberty",
     pages: 212,
-    read: true
+    read: false
   },
   {
     author: "George Orwell",
@@ -76,19 +76,30 @@ function addBookToLibrary() {
   // First sort through existing books in myLibrary 
   //to see if it exists. If it does, do nothing or 
   //return an error message
-  console.log('hello')
+  console.log('addBookToLibrary function called')
   // If it does not already exist, add it to the 
   //myLibrary array.
 }
 
 function alreadyInLibrary() {
   let inLibrary = false;
-  for (let x in myLibrary) {
-    if ('the title input here' === x.title) {
-      inLibrary = true;
+  let formTitle = document.getElementsByName('form-title')[0].value;
+  let formAuthor = document.getElementsByName('form-author')[0].value;
+  
+  for (let i = 0; i < myLibrary.length; i++) {
+    console.group('Checking...');
+    console.log(formTitle + ' : ' + myLibrary[i].title);
+    if (formTitle == myLibrary[i].title) {
+      console.log('The title already exists...');
+      if (formAuthor == myLibrary[i].author) {
+        console.log(formAuthor + ' : ' + myLibrary[i].author);
+        inLibrary = true;
+        console.log("... and it's by the same author.");
+      }
     }
+    console.groupEnd('Checking...');
   }
-  console.log(inLibrary);
+  console.log('inLibrary is: ' + inLibrary);
   return inLibrary;
 }
 
@@ -96,7 +107,7 @@ function clickHandler(e) {
   if (alreadyInLibrary()) {
     return null;
   } else {
-    this.addBookToLibrary();
+    addBookToLibrary();
   };
   displayBooks();
 }
@@ -108,7 +119,6 @@ function displayBooks() {
   for (let i = 0; i < myLibrary.length ; i++) {
     let aBook = myLibrary[i];
     let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
-    console.log(spinalTitle);
     const aBookCard = libraryContainer.appendChild(document.createElement('article'));
           aBookCard.classList.add('book-card');
           aBookCard.id = spinalTitle;
@@ -121,7 +131,9 @@ function displayBooks() {
     const bookPages = aBookCard.appendChild(document.createElement('p'));
           bookPages.classList.add('book-pages');
           bookPages.textContent = aBook.pages.toString() + ' pages';
-    const bookRead = aBookCard.appendChild(document.createElement('input'));
+    const bookReadLabel = aBookCard.appendChild(document.createElement('label'));
+          bookReadLabel.textContent = "Read? "
+    const bookRead = bookReadLabel.appendChild(document.createElement('input'));
           bookRead.type = "checkbox";
           bookRead.checked = aBook.read;
   }
