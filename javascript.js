@@ -1,3 +1,12 @@
+class Book {
+  constructor() {
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.read = Boolean(read);
+  }
+}
+
 const container = document.getElementById("main").appendChild(document.createElement('div'));
       container.classList.add('container', 'content-container');
       container.id = 'container';
@@ -5,6 +14,7 @@ const addBookButton = container.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
       addBookButton.textContent = 'Add Book to Library';
+      addBookButton.addEventListener('click', () => clickHandler())
 
 let myLibrary = [
   {
@@ -33,23 +43,34 @@ let myLibrary = [
   }
 ];
 
-class Book {
-  constructor() {
-    this.author = author;
-    this.title = title;
-    this.pages = pages;
-    this.read = Boolean(read);
-  }
+function addBookToLibrary() {
+  // First sort through existing books in myLibrary 
+  //to see if it exists. If it does, do nothing or 
+  //return an error message
+  console.log('hello')
+  // If it does not already exist, add it to the 
+  //myLibrary array.
 
-  addBookToLibrary() {
-    // First sort through existing books in myLibrary 
-    //to see if it exists. If it does, do nothing or 
-    //return an error message
-  
-    // If it does not already exist, add it to the 
-    //myLibrary array.
-  
+}
+
+function alreadyInLibrary() {
+  let inLibrary = false;
+  for (let x in myLibrary) {
+    if ('the title input here' !== x.title) {
+      inLibrary = true;
+    }
   }
+  console.log(inLibrary);
+  return inLibrary;
+}
+
+function clickHandler(e) {
+  if (alreadyInLibrary()) {
+    return null;
+  } else {
+    this.addBookToLibrary();
+  };
+
 }
 
 function displayBooks() {
@@ -75,4 +96,4 @@ function displayBooks() {
   }
 }
 
-displayBooks()
+displayBooks();
