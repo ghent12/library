@@ -69,7 +69,9 @@ function displayBooks() {
     const bookPages = aBookCard.appendChild(document.createElement('p'));
           bookPages.classList.add('book-pages');
           bookPages.textContent = aBook.pages.toString() + ' pages';
-
+    const bookRead = aBookCard.appendChild(document.createElement('input'));
+          bookRead.type = "checkbox";
+          bookRead.checked = aBook.read;
   }
 }
 
