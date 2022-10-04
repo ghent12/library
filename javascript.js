@@ -53,20 +53,20 @@ class Book {
 }
 
 function displayBooks() {
-  for (let i = 0; i < myLibrary.length - 1; i++) {
+  for (let i = 0; i < myLibrary.length ; i++) {
     let aBook = myLibrary[i];
     let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
     console.log(spinalTitle);
-    const aBookCard = container.createElement('div');
+    const aBookCard = container.appendChild(document.createElement('div'));
           aBookCard.classList.add('book-card');
           aBookCard.id = spinalTitle;
-    const bookTitle = aBookCard.createElement('h4');
+    const bookTitle = aBookCard.appendChild(document.createElement('h4'));
           bookTitle.classList.add('book-title');
           bookTitle.textContent = aBook.title;
-    const bookAuthor = aBookCard.createElement('h4');
+    const bookAuthor = aBookCard.appendChild(document.createElement('h4'));
           bookAuthor.classList.add('book-author');
           bookAuthor.textContent = aBook.author;
-    const bookPages = aBookCard.createElement('p');
+    const bookPages = aBookCard.appendChild(document.createElement('p'));
           bookPages.classList.add('book-pages');
           bookPages.textContent = aBook.pages.toString() + ' pages';
 
