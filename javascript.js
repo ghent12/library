@@ -53,7 +53,24 @@ class Book {
 }
 
 function displayBooks() {
+  for (let i = 0; i < myLibrary.length - 1; i++) {
+    let aBook = myLibrary[i];
+    let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
+    console.log(spinalTitle);
+    const aBookCard = container.createElement('div');
+          aBookCard.classList.add('book-card');
+          aBookCard.id = spinalTitle;
+    const bookTitle = aBookCard.createElement('h4');
+          bookTitle.classList.add('book-title');
+          bookTitle.textContent = aBook.title;
+    const bookAuthor = aBookCard.createElement('h4');
+          bookAuthor.classList.add('book-author');
+          bookAuthor.textContent = aBook.author;
+    const bookPages = aBookCard.createElement('p');
+          bookPages.classList.add('book-pages');
+          bookPages.textContent = aBook.pages.toString() + ' pages';
 
+  }
 }
 
 displayBooks()
