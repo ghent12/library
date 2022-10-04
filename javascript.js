@@ -10,26 +10,40 @@ class Book {
 const container = document.getElementById("main").appendChild(document.createElement('div'));
       container.classList.add('container', 'content-container');
       container.id = 'container';
+const libraryContainer = container.appendChild(document.createElement('div'));
+      libraryContainer.classList.add('container', 'library-container');
 const addBookForm = container.appendChild(document.createElement('form'));
-const addBookInputTitle = addBookForm.appendChild(document.createElement('input'));
+      addBookForm.id = "add-book-form";
+const addBookLabelTitle = addBookForm.appendChild(document.createElement('label'));
+      addBookLabelTitle.textContent = "Title: "
+const addBookInputTitle = addBookLabelTitle.appendChild(document.createElement('input'));
       addBookInputTitle.type = "text";
+      addBookInputTitle.name = "title";
       addBookInputTitle.classList.add('input', 'input-title');
-const addBookInputAuthor = addBookForm.appendChild(document.createElement('input'));
+const addBookLabelAuthor = addBookForm.appendChild(document.createElement('label'));
+      addBookLabelAuthor.textContent = "Author: "
+const addBookInputAuthor = addBookLabelAuthor.appendChild(document.createElement('input'));
       addBookInputAuthor.type = "text";
+      addBookInputAuthor.name = "author";
       addBookInputAuthor.classList.add('input', 'input-author');
-const addBookInputPages = addBookForm.appendChild(document.createElement('input'));
+const addBookLabelPages = addBookForm.appendChild(document.createElement('label'));
+      addBookLabelPages.textContent = "Pages: "
+const addBookInputPages = addBookLabelPages.appendChild(document.createElement('input'));
       addBookInputPages.type = "number";
+      addBookInputPages.name = "pages";
       addBookInputPages.classList.add('input', 'input-pages');
-const addBookInputRead = addBookForm.appendChild(document.createElement('input'));
+const addBookLabelRead = addBookForm.appendChild(document.createElement('label'));
+      addBookLabelRead.textContent = "Read? "
+const addBookInputRead = addBookLabelRead.appendChild(document.createElement('input'));
       addBookInputRead.type = "checkbox";
+      addBookInputRead.name = "read";
       addBookInputRead.classList.add('input', 'input-read');
       addBookInputRead.checked = false;
-const addBookButton = addBookForm.appendChild(document.createElement('button'));
+const addBookButton = container.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
       addBookButton.textContent = 'Add Book to Library';
       addBookButton.addEventListener('click', () => clickHandler())
-
 
 let myLibrary = [
   {
@@ -84,15 +98,18 @@ function clickHandler(e) {
   } else {
     this.addBookToLibrary();
   };
-
+  displayBooks();
 }
 
 function displayBooks() {
+  let allBooks = document.querySelectorAll('article');
+  allBooks.forEach(book => book.remove())
+
   for (let i = 0; i < myLibrary.length ; i++) {
     let aBook = myLibrary[i];
     let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
     console.log(spinalTitle);
-    const aBookCard = container.appendChild(document.createElement('div'));
+    const aBookCard = libraryContainer.appendChild(document.createElement('article'));
           aBookCard.classList.add('book-card');
           aBookCard.id = spinalTitle;
     const bookTitle = aBookCard.appendChild(document.createElement('h4'));

@@ -2,6 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 1px solid red;
+}
+
+#add-book-form {
+  display: grid;
+  margin: 0.5rem;
+  background-color: #b7b0bf;
 }
 
 .book-card {
