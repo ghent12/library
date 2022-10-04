@@ -10,11 +10,26 @@ class Book {
 const container = document.getElementById("main").appendChild(document.createElement('div'));
       container.classList.add('container', 'content-container');
       container.id = 'container';
-const addBookButton = container.appendChild(document.createElement('button'));
+const addBookForm = container.appendChild(document.createElement('form'));
+const addBookInputTitle = addBookForm.appendChild(document.createElement('input'));
+      addBookInputTitle.type = "text";
+      addBookInputTitle.classList.add('input', 'input-title');
+const addBookInputAuthor = addBookForm.appendChild(document.createElement('input'));
+      addBookInputAuthor.type = "text";
+      addBookInputAuthor.classList.add('input', 'input-author');
+const addBookInputPages = addBookForm.appendChild(document.createElement('input'));
+      addBookInputPages.type = "number";
+      addBookInputPages.classList.add('input', 'input-pages');
+const addBookInputRead = addBookForm.appendChild(document.createElement('input'));
+      addBookInputRead.type = "checkbox";
+      addBookInputRead.classList.add('input', 'input-read');
+      addBookInputRead.checked = false;
+const addBookButton = addBookForm.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
       addBookButton.textContent = 'Add Book to Library';
       addBookButton.addEventListener('click', () => clickHandler())
+
 
 let myLibrary = [
   {
@@ -50,13 +65,12 @@ function addBookToLibrary() {
   console.log('hello')
   // If it does not already exist, add it to the 
   //myLibrary array.
-
 }
 
 function alreadyInLibrary() {
   let inLibrary = false;
   for (let x in myLibrary) {
-    if ('the title input here' !== x.title) {
+    if ('the title input here' === x.title) {
       inLibrary = true;
     }
   }
@@ -95,5 +109,8 @@ function displayBooks() {
           bookRead.checked = aBook.read;
   }
 }
+
+let helloWorld = document.getElementById('hello-world')
+helloWorld.removeChild(helloWorld.firstElementChild);
 
 displayBooks();
