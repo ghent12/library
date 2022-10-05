@@ -14,6 +14,7 @@ const libraryContainer = container.appendChild(document.createElement('div'));
       libraryContainer.classList.add('container', 'library-container');
 const addBookForm = container.appendChild(document.createElement('form'));
       addBookForm.id = "add-book-form";
+      addBookForm.classList.add('hidden-form');
 const addBookLabelTitle = addBookForm.appendChild(document.createElement('label'));
       addBookLabelTitle.textContent = "Title: "
 const addBookInputTitle = addBookLabelTitle.appendChild(document.createElement('input'));
@@ -117,7 +118,7 @@ function clickHandler(e) {
 }
 
 function showForm() {
-
+  addBookForm.classList.remove('hidden-form');
 }
 
 function displayBooks() {

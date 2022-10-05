@@ -11,6 +11,14 @@
   background-color: #b7b0bf;
 }
 
+.hidden-form {
+  visibility: hidden;
+}
+
+input, label {
+  visibility: inherit;
+}
+
 .book-card {
   background-color: #d0d0dd;
   margin: 0.5rem;
