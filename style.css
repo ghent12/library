@@ -2,13 +2,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 0px solid red;
+  border: 1px solid red;
 }
 
 #add-book-form {
   display: grid;
   margin: 0.5rem;
   background-color: #b7b0bf;
+  width: 15rem;
+  justify-content: end;
+  border: 2px ridge black;
+  border-radius: 4px;
 }
 
 .add-book-button, .add-book-button-clicked {
@@ -47,7 +51,59 @@ input, label {
   visibility: inherit;
 }
 
+label {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+input {
+  justify-self: end;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.input-read {
+  justify-self: left;
+}
+
+.input-submit {
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.library-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fill, 1fr);
+  grid-template-rows: repeat(auto-fit, 1fr);
+}
+
 .book-card {
   background-color: #d0d0dd;
   margin: 0.5rem;
+  width: 12rem;
+}
+
+.book-title {
+  height: 2.3rem;
+  text-align: center;
+  display: grid;
+  align-content: center;
+}
+
+.book-author {
+  text-align: center;
+}
+
+.book-pages {
+  text-align: end;
+}
+
+.book-read-label {
+  display: grid;
+  justify-content: right;
+}
+
+.book-read {
+  justify-self: left;
 }

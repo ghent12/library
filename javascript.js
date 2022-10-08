@@ -1,5 +1,10 @@
 class Book {
-  constructor() {
+  constructor(
+    title = 'unknown',
+    author = 'unknown',
+    pages = 0,
+    read = false
+  ) {
     this.author = author;
     this.title = title;
     this.pages = pages;
@@ -40,6 +45,11 @@ const addBookInputRead = addBookLabelRead.appendChild(document.createElement('in
       addBookInputRead.name = "form-read";
       addBookInputRead.classList.add('input', 'input-read');
       addBookInputRead.checked = false;
+const addBookSubmitButton = addBookForm.appendChild(document.createElement('button'));
+      addBookSubmitButton.type = "button";
+      addBookSubmitButton.name = "form-submit";
+      addBookSubmitButton.textContent = "Submit New Book";
+      addBookSubmitButton.classList.add('input', 'input-submit');
 const addBookButton = container.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
@@ -144,8 +154,10 @@ function displayBooks() {
           bookPages.textContent = aBook.pages.toString() + ' pages';
     const bookReadLabel = aBookCard.appendChild(document.createElement('label'));
           bookReadLabel.textContent = "Read? "
+          bookReadLabel.classList.add('book-read-label');
     const bookRead = bookReadLabel.appendChild(document.createElement('input'));
           bookRead.type = "checkbox";
+          bookRead.classList.add('book-read');
           bookRead.checked = aBook.read;
   }
 }
