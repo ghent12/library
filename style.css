@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid red;
+  border: 0px solid red;
 }
 
 #add-book-form {
@@ -11,8 +11,36 @@
   background-color: #b7b0bf;
 }
 
+.add-book-button, .add-book-button-clicked {
+  font-size: 3rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #3f3030;
+  background-color: #9f9090;
+  border: 1px solid #1f1f1f;
+  border-radius: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  justify-content: center;
+  line-height: 2.8rem;
+  transition: color 0.7s, background-color 0.3s, font-size 0.15s;
+}
+
+.add-book-button:hover {
+  color: #cf3030;
+  background-color: #bf9090;
+  font-size: 3.3rem;
+}
+
+.add-book-button-clicked {
+  color: #3fc030;
+  background-color: #9fb090;
+  font-size: 3.3rem;
+}
+
 .hidden-form {
   visibility: hidden;
+  display: grid;
 }
 
 input, label {

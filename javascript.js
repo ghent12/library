@@ -43,7 +43,7 @@ const addBookInputRead = addBookLabelRead.appendChild(document.createElement('in
 const addBookButton = container.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
-      addBookButton.textContent = 'Add New Book to Library';
+      addBookButton.textContent = '+';
       addBookButton.addEventListener('click', () => clickShowForm())
 
 let myLibrary = [
@@ -119,6 +119,8 @@ function clickHandler(e) {
 
 function showForm() {
   addBookForm.classList.remove('hidden-form');
+  addBookButton.classList.add('add-book-button-clicked');
+  addBookButton.classList.remove('add-book-button')
 }
 
 function displayBooks() {
