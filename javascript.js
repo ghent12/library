@@ -247,7 +247,6 @@ function displayBooks() {
           bookRemoveButton.name = aBook.title.toString();
           bookRemoveButton.id = "remove" + aBook.id.toString();
           bookRemoveButton.addEventListener('click', () => removeBook(bookRemoveButton.id));
-          //This works but it leaves the entry in the array//bookRemoveButton.setAttribute('onclick','this.parentNode.remove()');
           bookRemoveButton.classList.add('button', 'remove-button');
           bookRemoveButton.textContent = 'x';
 
@@ -257,7 +256,5 @@ function displayBooks() {
 
 let helloWorld = document.getElementById('hello-world');
 helloWorld.removeChild(helloWorld.firstElementChild);
-//let hideForm = document.getElementById('add-book-form').children;
-//hideForm.style.display = 'hidden';
 
 displayBooks();

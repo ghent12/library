@@ -6,7 +6,7 @@
   --read-color-1: #952;
   --read-color-2: #c73;
   --read-color-3: #ea5;
-  /*  #141, #373 70%, #9f9 90% */
+  /* Not utilized directly due to the ::after pseudo possibly interfering with their functionality. */
 }
 
 * {
@@ -112,21 +112,11 @@ input {
 }
 
 .book-card-nest {
-/*  background-image: repeating-linear-gradient(45deg, #111, #555 15%, #ccc 22%);
-  padding: 0 0 0 0.3rem;
-
-  /*  border-radius: 0 0 0 0.3rem;
-  border-style: solid;
-  border-image: repeating-linear-gradient(45deg, #111, #555 15%, #ccc 22%);
-
-  background: repeating-linear-gradient(-45deg, #111, #555 20%, #ccc 24%) 25 25;
-  */
   font-size: 1rem;
   margin: 0.5rem;
 }
 
 .book-card, .book-card-read {
-  /*background-color: #d0d0dd;*/
   background: linear-gradient(-45deg, #421, #642 70%, #853 90%);
   color: #bbb;
   margin: 1rem;
@@ -147,10 +137,6 @@ input {
   top: -1px; bottom: -1px;
   left: -1rem; right: -1px;
   background: linear-gradient(-45deg, #141, #373 70%, #9f9 90%);
-/*  --not-read-color1: #141;
-  --not-read-color2: #373;
-  --not-read-color3: #9f9;
-*/
   content: '';
   z-index: -1;
   border-radius: 1rem 4px 4px 1rem;
