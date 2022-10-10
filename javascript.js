@@ -3,12 +3,14 @@ class Book {
     title = 'unknown',
     author = 'unknown',
     pages = 0,
-    read = false
+    read = false,
+    id = 1
   ) {
     this.author = author;
     this.title = title;
     this.pages = pages;
     this.read = Boolean(read);
+    this.id = id;
   }
 }
 
@@ -65,27 +67,33 @@ let myLibrary = [
     author: "J.R.R. Tolkien",
     title: "The Hobbit",
     pages: 304,
-    read: true
+    read: true,
+    id: 1
   },
   {
     author: "Tom Clancy",
     title: "The Hunt for Red October",
     pages: 387,
-    read: true
+    read: true,
+    id: 2
   },
   {
     author: "John Stuart Mill",
     title: "On Liberty",
     pages: 212,
-    read: true
+    read: true,
+    id: 3
   },
   {
     author: "George Orwell",
     title: "1984",
     pages: 328,
-    read: false
+    read: false,
+    id: 4
   }
 ];
+
+let nextID = 5;
 
 function addBookToLibrary() {
   console.log('addBookToLibrary function called')
@@ -93,11 +101,13 @@ function addBookToLibrary() {
   let author = document.getElementsByName('form-author')[0].value;
   let pages = document.getElementsByName('form-pages')[0].value;
   let read = document.getElementsByName('form-read')[0].checked;
-  myLibrary.push(new Book(title, author, pages, read))
+  let id = nextID;
+  myLibrary.push(new Book(title, author, pages, read, id))
   document.getElementsByName('form-title')[0].value = '';
   document.getElementsByName('form-author')[0].value = '';
   document.getElementsByName('form-pages')[0].value = '';
   document.getElementsByName('form-read')[0].checked = false;
+  nextID++;
   displayBooks();
   handleOverlayClick();
 }
@@ -161,6 +171,19 @@ function handleOverlayClick(e) {
   hideForm();
 }
 
+function removeBook(e) {
+  let removeID = parseInt(e.split('remove')[1]);
+  console.log(removeID);
+  for (let i = 0; i < myLibrary.length; i++) {
+    if (myLibrary[i].id === removeID) {
+      myLibrary.splice(i, 1);
+    }
+  }
+  console.log(myLibrary);
+  let killBook = document.getElementById(e);
+  killBook.parentNode.remove();
+}
+
 function hideForm() {
   overlay.classList.add('hidden-overlay');
   addBookForm.classList.add('hidden-form');
@@ -209,7 +232,10 @@ function displayBooks() {
           bookRead.checked = aBook.read;
           bookRead.addEventListener('click', () => changeReadColor())
     const bookRemoveButton = aBookNest.appendChild(document.createElement('button'));
-          bookRemoveButton.addEventListener('click', () => removeBook());
+          bookRemoveButton.name = aBook.title.toString();
+          bookRemoveButton.id = "remove" + aBook.id.toString();
+          bookRemoveButton.addEventListener('click', () => removeBook(bookRemoveButton.id));
+          //This works but it leaves the entry in the array//bookRemoveButton.setAttribute('onclick','this.parentNode.remove()');
           bookRemoveButton.classList.add('button', 'remove-button');
           bookRemoveButton.textContent = 'x';
 

@@ -170,7 +170,7 @@ input {
 
 .remove-button {
   position: relative;
-  left: 80%;
+  right: -80%;
   top: -78%;
   background-color: #11111199;
   color: #d0d9d0;
@@ -181,6 +181,7 @@ input {
 
 .book-title {
   height: 2.3rem;
+  margin-right: 1rem;
   text-align: center;
   display: grid;
   align-content: center;
@@ -188,6 +189,7 @@ input {
 
 .book-author {
   text-align: center;
+  margin-right: 1rem;
 }
 
 .book-pages {
