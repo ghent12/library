@@ -1,5 +1,12 @@
 :root {
   font-size: 16px;
+  --not-read-color1: #141;
+  --not-read-color2: #373;
+  --not-read-color3: #9f9;
+  --read-color-1: #952;
+  --read-color-2: #c73;
+  --read-color-3: #ea5;
+  /*  #141, #373 70%, #9f9 90% */
 }
 
 * {
@@ -100,9 +107,7 @@ input {
 
 .library-container {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(auto-fit, 12rem);
-  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 1rem;
 }
 
@@ -120,9 +125,11 @@ input {
   margin: 0.5rem;
 }
 
-.book-card {
-  background-color: #d0d0dd;
-  margin: 0 0 0 0.3rem;
+.book-card, .book-card-read {
+  /*background-color: #d0d0dd;*/
+  background: linear-gradient(-45deg, #421, #642 70%, #853 90%);
+  color: #bbb;
+  margin: 1rem;
   width: 12rem;
   border-radius: 1rem 4px 4px 1rem;
   border-color: transparent;
@@ -130,6 +137,9 @@ input {
   position: relative;
   padding: 10px;
   background-clip: padding-box;
+  transition: background 2s;
+  display: grid;
+  gap: 0.2rem;
 }
 
 .book-card::after {
@@ -137,9 +147,36 @@ input {
   top: -1px; bottom: -1px;
   left: -1rem; right: -1px;
   background: linear-gradient(-45deg, #141, #373 70%, #9f9 90%);
+/*  --not-read-color1: #141;
+  --not-read-color2: #373;
+  --not-read-color3: #9f9;
+*/
   content: '';
   z-index: -1;
   border-radius: 1rem 4px 4px 1rem;
+  transition: background 0.4s;
+}
+
+.book-card-read::after {
+  position: absolute;
+  top: -1px; bottom: -1px;
+  left: -1rem; right: -1px;
+  background: linear-gradient(-45deg, #421, #731 70%, #fb8 90%);
+  content: '';
+  z-index: -1;
+  border-radius: 1rem 4px 4px 1rem;
+  transition: background 0.4s;
+}
+
+.remove-button {
+  position: relative;
+  left: 80%;
+  top: -78%;
+  background-color: #11111199;
+  color: #d0d9d0;
+  padding: 0.5rem;
+  line-height: 0.15rem;
+  border-radius: 1rem;
 }
 
 .book-title {
@@ -164,4 +201,5 @@ input {
 
 .book-read {
   justify-self: left;
+  margin-left: 0.4rem;
 }

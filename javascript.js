@@ -53,6 +53,7 @@ const addBookSubmitButton = addBookForm.appendChild(document.createElement('butt
       addBookSubmitButton.name = "form-submit";
       addBookSubmitButton.textContent = "Submit New Book";
       addBookSubmitButton.classList.add('input', 'input-submit');
+      addBookSubmitButton.addEventListener('click', () => clickHandler())
 const addBookButton = container.appendChild(document.createElement('button'));
       addBookButton.classList.add('button', 'btn', 'add-book-button');
       addBookButton.id = 'add-book-button';
@@ -64,19 +65,19 @@ let myLibrary = [
     author: "J.R.R. Tolkien",
     title: "The Hobbit",
     pages: 304,
-    read: false
+    read: true
   },
   {
     author: "Tom Clancy",
     title: "The Hunt for Red October",
     pages: 387,
-    read: false
+    read: true
   },
   {
     author: "John Stuart Mill",
     title: "On Liberty",
     pages: 212,
-    read: false
+    read: true
   },
   {
     author: "George Orwell",
@@ -87,12 +88,34 @@ let myLibrary = [
 ];
 
 function addBookToLibrary() {
-  // First sort through existing books in myLibrary 
-  //to see if it exists. If it does, do nothing or 
-  //return an error message
   console.log('addBookToLibrary function called')
-  // If it does not already exist, add it to the 
-  //myLibrary array.
+  let title = document.getElementsByName('form-title')[0].value;
+  let author = document.getElementsByName('form-author')[0].value;
+  let pages = document.getElementsByName('form-pages')[0].value;
+  let read = document.getElementsByName('form-read')[0].checked;
+  myLibrary.push(new Book(title, author, pages, read))
+  document.getElementsByName('form-title')[0].value = '';
+  document.getElementsByName('form-author')[0].value = '';
+  document.getElementsByName('form-pages')[0].value = '';
+  document.getElementsByName('form-read')[0].checked = false;
+  displayBooks();
+  handleOverlayClick();
+}
+
+function changeReadColor() {
+  let bookCardsInView = Array.from(document.getElementsByClassName('book-nest'));
+  console.log(bookCardsInView[0].firstElementChild.lastChild.lastChild.checked);
+  for (let i = 0; i < bookCardsInView.length; i++) {
+    if (bookCardsInView[i].firstElementChild.lastChild.lastChild.checked) {
+      bookCardsInView[i].firstElementChild.classList.add('book-card-read');
+      bookCardsInView[i].firstElementChild.classList.remove('book-card');
+    } else {
+      bookCardsInView[i].firstElementChild.classList.add('book-card');
+      bookCardsInView[i].firstElementChild.classList.remove('book-card-read');
+    }
+  }
+  //background: linear-gradient(-45deg, var(--not-read-color1), var(--not-read-color2) 70%, var(--not-read-color3) 90%);
+  //body.style.backgroundImage = "linear-gradient(to right, "+ color_1.value +", "+ color_2.value +")";
 }
 
 function alreadyInLibrary() {
@@ -119,9 +142,13 @@ function alreadyInLibrary() {
 
 function clickShowForm(e) {
   showForm();
+  changeReadColor();
 }
 
 function clickHandler(e) {
+  // First sort through existing books in myLibrary 
+  //to see if it exists. If it does, do nothing or 
+  //return an error message
   if (alreadyInLibrary()) {
     return null;
   } else {
@@ -155,9 +182,9 @@ function displayBooks() {
   for (let i = 0; i < myLibrary.length ; i++) {
     let aBook = myLibrary[i];
     let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
-    const aBookCardNest = libraryContainer.appendChild(document.createElement('article'));
-          aBookCardNest.classList.add('book-card-nest');
-    const aBookCard = aBookCardNest.appendChild(document.createElement('div'));
+    const aBookNest = libraryContainer.appendChild(document.createElement('article'));
+          aBookNest.classList.add('book-nest');
+    const aBookCard = aBookNest.appendChild(document.createElement('div'));
           aBookCard.classList.add('book-card');
           aBookCard.id = spinalTitle;
     const bookTitle = aBookCard.appendChild(document.createElement('h4'));
@@ -168,7 +195,11 @@ function displayBooks() {
           bookAuthor.textContent = aBook.author;
     const bookPages = aBookCard.appendChild(document.createElement('p'));
           bookPages.classList.add('book-pages');
+        if (aBook.pages === 1) {
+          bookPages.textContent = aBook.pages.toString() + ' page';
+        } else {
           bookPages.textContent = aBook.pages.toString() + ' pages';
+        }
     const bookReadLabel = aBookCard.appendChild(document.createElement('label'));
           bookReadLabel.textContent = "Read? "
           bookReadLabel.classList.add('book-read-label');
@@ -176,7 +207,14 @@ function displayBooks() {
           bookRead.type = "checkbox";
           bookRead.classList.add('book-read');
           bookRead.checked = aBook.read;
+          bookRead.addEventListener('click', () => changeReadColor())
+    const bookRemoveButton = aBookNest.appendChild(document.createElement('button'));
+          bookRemoveButton.addEventListener('click', () => removeBook());
+          bookRemoveButton.classList.add('button', 'remove-button');
+          bookRemoveButton.textContent = 'x';
+
   }
+  changeReadColor();
 }
 
 let helloWorld = document.getElementById('hello-world');
