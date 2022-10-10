@@ -12,6 +12,9 @@ class Book {
   }
 }
 
+const overlay = document.getElementById("main").appendChild(document.createElement('div'));
+      overlay.classList.add('overlay', 'hidden-overlay');
+      overlay.addEventListener('click', () => handleOverlayClick());
 const container = document.getElementById("main").appendChild(document.createElement('div'));
       container.classList.add('container', 'content-container');
       container.id = 'container';
@@ -127,8 +130,19 @@ function clickHandler(e) {
   displayBooks();
 }
 
+function handleOverlayClick(e) {
+  console.log('handleOverlayClick')
+  hideForm();
+}
+
+function hideForm() {
+  overlay.classList.add('hidden-overlay');
+  addBookForm.classList.add('hidden-form');
+}
+
 function showForm() {
   addBookForm.classList.remove('hidden-form');
+  overlay.classList.remove('hidden-overlay');
   addBookButton.classList.add('add-book-button-clicked');
   addBookButton.classList.remove('add-book-button')
 }
@@ -140,7 +154,9 @@ function displayBooks() {
   for (let i = 0; i < myLibrary.length ; i++) {
     let aBook = myLibrary[i];
     let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
-    const aBookCard = libraryContainer.appendChild(document.createElement('article'));
+    const aBookCardNest = libraryContainer.appendChild(document.createElement('article'));
+          aBookCardNest.classList.add('book-card-nest');
+    const aBookCard = aBookCardNest.appendChild(document.createElement('div'));
           aBookCard.classList.add('book-card');
           aBookCard.id = spinalTitle;
     const bookTitle = aBookCard.appendChild(document.createElement('h4'));

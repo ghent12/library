@@ -1,18 +1,43 @@
+:root {
+  font-size: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid red;
+  border: 0px solid red;
+}
+
+.overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 98;
+  background-color: #88888888;
+  visibility: inherit;
+}
+
+.hidden-overlay {
+  visibility: hidden;
 }
 
 #add-book-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
   display: grid;
   margin: 0.5rem;
+  padding: 0.5rem;
   background-color: #b7b0bf;
-  width: 15rem;
+  width: 15.5rem;
+  line-height: 1.2rem;
   justify-content: end;
   border: 2px ridge black;
   border-radius: 4px;
+  transform: translate(-50%, -50%);
+  transition: 0.1s ease-in-out;
 }
 
 .add-book-button, .add-book-button-clicked {
@@ -28,6 +53,7 @@
   justify-content: center;
   line-height: 2.8rem;
   transition: color 0.7s, background-color 0.3s, font-size 0.15s;
+  margin: 1rem;
 }
 
 .add-book-button:hover {
@@ -49,6 +75,7 @@
 
 input, label {
   visibility: inherit;
+  line-height: inherit;
 }
 
 label {
@@ -78,10 +105,40 @@ input {
   grid-template-rows: repeat(auto-fit, 1fr);
 }
 
+.book-card-nest {
+/*  background-image: repeating-linear-gradient(45deg, #111, #555 15%, #ccc 22%);
+  padding: 0 0 0 0.3rem;
+
+  /*  border-radius: 0 0 0 0.3rem;
+  border-style: solid;
+  border-image: repeating-linear-gradient(45deg, #111, #555 15%, #ccc 22%);
+
+  background: repeating-linear-gradient(-45deg, #111, #555 20%, #ccc 24%) 25 25;
+  */
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
 .book-card {
   background-color: #d0d0dd;
-  margin: 0.5rem;
+  margin: 0 0 0 0.3rem;
   width: 12rem;
+  border-radius: 1rem 4px 4px 1rem;
+  border-color: transparent;
+  border-width: 0 0 0 20px;
+  position: relative;
+  padding: 10px;
+  background-clip: padding-box;
+}
+
+.book-card::after {
+  position: absolute;
+  top: -1px; bottom: -1px;
+  left: -1rem; right: -1px;
+  background: linear-gradient(-45deg, #141, #373 70%, #9f9 90%);
+  content: '';
+  z-index: -1;
+  border-radius: 1rem 4px 4px 1rem;
 }
 
 .book-title {
