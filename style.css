@@ -107,7 +107,7 @@ input {
 
 .library-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fill, 12rem);
   gap: 1rem;
 }
 
@@ -170,7 +170,7 @@ input {
 
 .remove-button {
   position: relative;
-  right: -80%;
+  right: -95%;
   top: -78%;
   background-color: #11111199;
   color: #d0d9d0;

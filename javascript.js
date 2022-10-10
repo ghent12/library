@@ -119,13 +119,23 @@ function changeReadColor() {
     if (bookCardsInView[i].firstElementChild.lastChild.lastChild.checked) {
       bookCardsInView[i].firstElementChild.classList.add('book-card-read');
       bookCardsInView[i].firstElementChild.classList.remove('book-card');
+      console.log(bookCardsInView[i].id.split('nest')[1])
+      for (let j = 0; j < myLibrary.length; j++) {
+        if (parseInt(bookCardsInView[i].id.split('nest')[1]) === myLibrary[j].id) {
+          myLibrary[j].read = true;
+        }
+      }    
     } else {
       bookCardsInView[i].firstElementChild.classList.add('book-card');
       bookCardsInView[i].firstElementChild.classList.remove('book-card-read');
+      for (let j = 0; j < myLibrary.length; j++) {
+        if (parseInt(bookCardsInView[i].id.split('nest')[1]) === myLibrary[j].id) {
+          myLibrary[j].read = false;
+        }
+      }    
     }
   }
-  //background: linear-gradient(-45deg, var(--not-read-color1), var(--not-read-color2) 70%, var(--not-read-color3) 90%);
-  //body.style.backgroundImage = "linear-gradient(to right, "+ color_1.value +", "+ color_2.value +")";
+  console.log(myLibrary);
 }
 
 function alreadyInLibrary() {
@@ -207,6 +217,7 @@ function displayBooks() {
     let spinalTitle = aBook.title.split(' ').join('-').toLowerCase();
     const aBookNest = libraryContainer.appendChild(document.createElement('article'));
           aBookNest.classList.add('book-nest');
+          aBookNest.id = "nest" + aBook.id.toString();
     const aBookCard = aBookNest.appendChild(document.createElement('div'));
           aBookCard.classList.add('book-card');
           aBookCard.id = spinalTitle;
@@ -231,6 +242,7 @@ function displayBooks() {
           bookRead.classList.add('book-read');
           bookRead.checked = aBook.read;
           bookRead.addEventListener('click', () => changeReadColor())
+          bookRead.id = "read" + aBook.read.toString();
     const bookRemoveButton = aBookNest.appendChild(document.createElement('button'));
           bookRemoveButton.name = aBook.title.toString();
           bookRemoveButton.id = "remove" + aBook.id.toString();
