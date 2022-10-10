@@ -131,13 +131,14 @@ function clickHandler(e) {
 }
 
 function handleOverlayClick(e) {
-  console.log('handleOverlayClick')
   hideForm();
 }
 
 function hideForm() {
   overlay.classList.add('hidden-overlay');
   addBookForm.classList.add('hidden-form');
+  addBookButton.classList.add('add-book-button');
+  addBookButton.classList.remove('add-book-button-clicked');
 }
 
 function showForm() {
